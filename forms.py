@@ -11,3 +11,10 @@ class AddPetForm(FlaskForm):
     photo_url = URLField('Photo URL', validators=[Optional(), URL()])
     age = FloatField('Age', validators=[Optional(), NumberRange(min=0, max=30)])
     notes = StringField('Notes', validators=[Optional()])
+
+class EditPetForm(FlaskForm):
+    """Form for editing a pet"""
+
+    photo_url = URLField('Photo URL', validators=[Optional(), URL()])
+    age = FloatField('Age', validators=[Optional(), NumberRange(min=0, max=30)])
+    notes = StringField('Notes', validators=[Optional()])

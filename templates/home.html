@@ -2,12 +2,13 @@
 {% block title %}Homepage{% endblock %}
 {% block content %}
 <h1>All Pets</h1>
+<div class="row">
 {% for pet in pets %}
 
-<div>
 
+<div class="col-3">
 {% if pet.photo_url %}
-<img src="{{pet.photo_url}}" alt="{{pet.name}}">
+<img src="{{pet.photo_url}}" alt="{{pet.name}}" class="img-thumbnail">
 {% endif %}
 
 {% if pet.available %}
@@ -17,7 +18,8 @@
 </div>
 
 {% endfor %}
+</div>
 
-<a href="/add">Add a pet!</a>
+<a href="/add" class="btn btn-primary btn-md">Add a pet!</a>
 
 {% endblock %}

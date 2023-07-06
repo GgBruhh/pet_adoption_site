@@ -1,6 +1,6 @@
 from flask import Flask, redirect, request, render_template, flash, session
 from models import Pet, connect_db, db
-from forms import AddPetForm
+from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
 
@@ -38,3 +38,18 @@ def add_pet():
 def pet_details(id):
     pet = Pet.query.get_or_404(id)
     return render_template('pet_details.html', pet=pet)
+
+@app.route('/pet/<int:id>/edit', methods=['GET', 'POST'])
+def edit_details(id):
+    pet = Pet.query.get_or_404(id)
+    form = EditPetForm(obj=pet)
+
+    if form.validate_on_submit():
+        pet.photo_url = form.photo_url.data
+        pet.age = form.age.data
+        pet.notes = form.notes.data
+
+        db.session.commit()
+        return redirect('/')
+    else:
+        return render_template('edit_details.html', form=form)
