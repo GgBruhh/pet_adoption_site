@@ -31,6 +31,10 @@ def add_pet():
         db.session.add(pet)
         db.session.commit()
         return redirect('/')
-
     else:
         return render_template('add_pet.html', form=form)
+
+@app.route('/pet/<int:id>')
+def pet_details(id):
+    pet = Pet.query.get_or_404(id)
+    return render_template('pet_details.html', pet=pet)
